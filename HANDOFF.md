@@ -63,6 +63,23 @@ python3 -m http.server 8765
    - WeighTone: `weighttrackerapp://theme?mode=solid|auto|pro&color=RRGGBB&stops=RRGGBB-位置,...&angle=0〜315`
      （scheme は設定済み。受け取り処理の追加のみ）
    - 位置は 0〜100 の整数、stops は位置の小さい順
+4. **App Store Connect のURL（マネトーン）** ← 次回バージョン提出時にまとめて変更
+   - プライバシーポリシーURL / サポートURL / マーケティングURL が旧サイト
+     （`https://akitonbo.github.io/ashimo-legal/...`）のまま
+   - 1.0.3 が「配信準備完了」のため入力欄が読み取り専用。新バージョンを作らないと変更できない
+   - 変更後の値:
+     - プライバシーポリシーURL: `https://ashitanomotode.com/manetone/privacy.html`
+     - サポートURL / マーケティングURL: `https://ashitanomotode.com/manetone/`
+   - 旧URLは新サイトへリダイレクト済みなので、当面の実害はない
+
+## メールと旧サイトについて
+- 連絡先は **info@ashitanomotode.com**（お名前.comのレンタルサーバーで作成、
+  転送のみ設定 → ashitanomotode@gmail.com。サーバー側にはメールを残さない）
+- 旧規約サイト `Akitonbo/ashimo-legal` の `privacy-policy.html` / `terms.html` は、
+  新サイトの `ashitanomotode.com/manetone/` へリダイレクトするだけのページに置き換え済み。
+  `guide.html`（使い方ガイド）はアプリから参照されていないためそのまま残してある
+- アプリ側（slot-tracker）の規約URL定数は新サイトに書き換え済み（未コミット・未ビルド）
+  - `src/screens/SettingsScreen.js` / `src/components/ProPaywallModal.js`
 
 ## 注意点（確認したまま未対応）
 - WeighTone のプライバシーポリシーは「広告SDKなし・ヘルスケアは読み取りのみ」と書かれているが、
