@@ -692,6 +692,9 @@
   const APP_SCHEME = { manetone: 'manetone', weightone: 'weighttrackerapp' };
   // App Store の公開後に、ここへストアのURLを貼り付けてください
   const STORE_URL = { manetone: '', weightone: '' };
+  // アプリ側がディープリンク（上記スキーム）に対応したバージョンを配信したら true にする。
+  // false の間は「アプリに反映する」ボタンとQRコードを無効化し、色コードのコピー運用を案内する。
+  const APP_LINK_READY = false;
 
   function themeLink() {
     const p = new URLSearchParams();
@@ -714,10 +717,28 @@
   function renderApplyLink() {
     const url = themeLink();
     const name = state.app === 'manetone' ? 'マネトーン' : 'WeighTone';
-    $('applyBtn').href = url;
-    $('applyBtn').textContent = `${name}に反映する`;
+    const applyBtn = $('applyBtn');
+    const qrWrap = document.querySelector('.apply-qr');
+
+    applyBtn.textContent = APP_LINK_READY ? `${name}に反映する` : `${name}に反映する（準備中）`;
+    applyBtn.classList.toggle('is-disabled', !APP_LINK_READY);
+    applyBtn.setAttribute('aria-disabled', String(!APP_LINK_READY));
+    if (APP_LINK_READY) applyBtn.href = url;
+    else applyBtn.removeAttribute('href');
+
+    if (qrWrap) qrWrap.hidden = !APP_LINK_READY;
+
+    const lead = $('applyLead');
+    if (lead) {
+      lead.textContent = APP_LINK_READY
+        ? 'スマホでこのページを見ているときは、ボタンからアプリを開いてそのまま反映できます。パソコンのときは、QRコードをスマホで読み取ってください。'
+        : 'ボタンから直接反映する機能は、アプリの対応版を準備中です。いまは下の「使っている色」から色コードをコピーして、アプリに貼り付けてください。';
+    }
+
     $('applyUrl').textContent = url;
-    $('applyNote').textContent = `${name}が開かないときは、アプリが未インストールか、この機能に未対応のバージョンです。対応前は「色コードをコピー」してアプリに貼り付けてください。`;
+    $('applyNote').textContent = APP_LINK_READY
+      ? `${name}が開かないときは、アプリが未インストールか、この機能に未対応のバージョンです。対応前は「色コードをコピー」してアプリに貼り付けてください。`
+      : `${name}が対応版になると、このボタンからワンタップで色を反映できるようになります。`;
 
     // アプリを持っていない人向けのダウンロード導線
     const store = STORE_URL[state.app];
@@ -728,7 +749,8 @@
 
     // QRコード（パソコンで見ているとき用）
     const box = $('qrBox');
-    if (box && typeof qrcode === 'function') {
+    if (box && !APP_LINK_READY) box.innerHTML = '';
+    else if (box && typeof qrcode === 'function') {
       try {
         const qr = qrcode(0, 'M');
         qr.addData(url);
