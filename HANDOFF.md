@@ -2,6 +2,26 @@
 
 静的サイト（HTML / CSS / JavaScript のみ）。ビルド不要で、このフォルダをそのまま公開できます。
 
+## 公開状況(2026-09-24時点)
+- **公開URL:** https://ashitanomotode.com/ (独自ドメイン、DNS反映待ち。反映前は https://akitonbo.github.io/ashimo-apps/ でも見える)
+- **GitHubリポジトリ:** https://github.com/Akitonbo/ashimo-apps (公開リポジトリ、`gh` でログイン済みのAkitonbo GitHubアカウントで管理)
+- **ホスティング:** GitHub Pages(mainブランチのルートから配信、ビルド不要)
+- **ドメイン:** `ashitanomotode.com` をお名前.comで取得済み。DNS設定(Aレコード4つ→GitHub PagesのIP、wwwのCNAME→akitonbo.github.io)は設定済みだが、反映に時間がかかっている(最大24時間程度見込み)。反映後、GitHub側で「HTTPSを強制する」をONにする必要がある(`gh api -X PUT /repos/Akitonbo/ashimo-apps/pages -f https_enforced=true`)。
+- **このドメインを取得した経緯:** Apple Developer Programを個人から法人(屋号 ashita-no-motode)メンバーシップへ移行する際、Appleから「企業に関連付いた独自ドメインのWebサイトが必要」と言われたための取得。マネトーンの販売元名(本名表示)を変えるための手続きの一部。
+
+## 今後の更新方法(新しいセッションでの進め方)
+1. 新しいセッションで、このフォルダ(`~/Desktop/クロードコード入門/アプリ開発/ashimo-site`)を作業対象に指定する
+2. 「`HANDOFF.md` を読んで」と伝える
+3. HTML/CSS/JSを直接編集してもらう
+4. 確認は下記「ローカルでの確認」の手順で行う
+5. 公開は次のコマンドで(mainブランチにpushすると、数十秒〜1分程度で自動的にサイトへ反映される。ビルド作業は不要)
+   ```bash
+   git add -A
+   git commit -m "変更内容"
+   git push
+   ```
+6. 反映確認: https://ashitanomotode.com/ (または反映前なら https://akitonbo.github.io/ashimo-apps/ )を開く
+
 ## ファイル構成
 ```
 index.html            トップ（アプリ紹介・色の反映手順）
@@ -50,7 +70,6 @@ python3 -m http.server 8765
 - カラーラボの「基本色から自動で作る」は、サイト側だけ強めのグラデーション（白42%/黒30%）に変更済み。
   アプリ側（`src/utils/colors.js` の `deriveGradientStops`）は従来のまま（白22%/黒10%）。
 
-## 公開方法（無料）
-- GitHub Pages: このフォルダをリポジトリに入れて Pages を有効化（アプリの規約ページと同じ方式）
-- Cloudflare Pages: フォルダをドラッグ＆ドロップでアップロード
-- 独自ドメインを使う場合は、取得後に各サービスでドメインを設定
+## 公開方法（設定済み・参考）
+GitHub Pages（`Akitonbo/ashimo-apps` リポジトリの main ブランチ、ルートから配信）で公開済み。
+独自ドメイン設定は「公開状況」の節を参照。同じ仕組みなので、公開設定自体をやり直す必要はない。
