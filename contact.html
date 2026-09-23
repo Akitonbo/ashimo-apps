@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>お問い合わせ｜ashimo apps</title>
+  <meta name="description" content="マネトーン・WeighToneへの不具合のご報告、ご要望、ご質問はこちらのフォームからお送りください。">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=50">
+</head>
+<body data-page="contact">
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>ashimo apps</a>
+      <nav class="nav">
+        <a data-nav="home" href="index.html">ホーム</a>
+        <a data-nav="manetone" href="manetone/">マネトーン</a>
+        <a data-nav="weightone" href="weightone/">WeighTone</a>
+        <a data-nav="color" href="color.html"><span class="rainbow-label">カラーラボ</span></a>
+        <a data-nav="palette" href="palette.html">色見本</a>
+        <a data-nav="contact" href="contact.html" aria-current="page">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="doc" style="padding-bottom:16px">
+      <h1>お問い合わせ</h1>
+      <p style="color:var(--text-sub);margin-top:4px">不具合のご報告・ご要望・使い方のご質問など、お気軽にお送りください。いただいた内容は運営者（ashimo）にメールで届きます。</p>
+    </section>
+
+    <section class="section" style="padding-block:0 32px">
+      <div class="card" style="max-width:760px;margin:0 auto">
+        <form id="contactForm" class="req-form" novalidate>
+          <div class="rf-row">
+            <span class="rf-legend">対象 <span class="req">必須</span></span>
+            <div class="rf-radios" id="targetRadios">
+              <label><input type="radio" name="target" value="マネトーン" checked><img src="assets/icons/manetone.png" alt="">マネトーン</label>
+              <label><input type="radio" name="target" value="WeighTone"><img src="assets/icons/weightone.png" alt="">WeighTone</label>
+              <label><input type="radio" name="target" value="このサイト・その他"><i class="fa-solid fa-globe"></i>このサイト・その他</label>
+            </div>
+          </div>
+
+          <div class="rf-row">
+            <label for="cfKind">お問い合わせの種類 <span class="req">必須</span></label>
+            <select id="cfKind" name="kind">
+              <option>不具合の報告</option>
+              <option>機能のご要望</option>
+              <option>アイコンの追加希望（マネトーン）</option>
+              <option>使い方の質問</option>
+              <option>データ・引き継ぎについて</option>
+              <option>課金・Proについて</option>
+              <option>その他</option>
+            </select>
+          </div>
+
+          <div class="rf-row">
+            <label for="cfBody">内容 <span class="req">必須</span></label>
+            <textarea id="cfBody" name="body" rows="6" maxlength="2000" placeholder="例：iPhone 15（iOS 18）で、カレンダーの月を変えると金額が表示されないことがあります。"></textarea>
+            <span class="rf-hint">不具合のご報告は、お使いの機種・OSのバージョン・起きた操作を書いていただけると助かります。</span>
+          </div>
+
+          <div class="rf-grid">
+            <div class="rf-row">
+              <label for="cfName">お名前・ニックネーム</label>
+              <input type="text" id="cfName" name="name" maxlength="40" placeholder="任意">
+            </div>
+            <div class="rf-row">
+              <label for="cfMail">返信用メールアドレス</label>
+              <input type="email" id="cfMail" name="email" maxlength="120" placeholder="任意（返信が必要な場合）">
+            </div>
+          </div>
+
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" id="cfGotcha">
+
+          <div class="rf-actions">
+            <button type="submit" class="btn btn-primary" id="cfSubmit">送信する</button>
+            <span class="rf-status" id="cfStatus" role="status"></span>
+          </div>
+
+          <p class="howto" style="margin:4px 0 0">返信が必要な場合のみ、メールアドレスをご記入ください。いただいた個人情報は、お問い合わせへの対応以外には使用しません。</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" style="padding-block:0 48px">
+      <div class="card" style="max-width:760px;margin:0 auto">
+        <h2 class="section-title" style="font-size:18px"><i class="fa-solid fa-circle-question feat-ic" style="color:#4A7DF0"></i>お問い合わせの前に</h2>
+        <ul class="contact-links">
+          <li><i class="fa-solid fa-palette feat-ic" style="color:#F0A93B"></i><span>色やグラデーションの設定方法は <a href="color.html">カラーラボ</a> でご確認いただけます。</span></li>
+          <li><i class="fa-solid fa-file-lines feat-ic" style="color:#6B7280"></i><span>データの扱いについては、<a href="manetone/privacy.html">マネトーン</a>／<a href="weightone/privacy.html">WeighTone</a> のプライバシーポリシーをご覧ください。</span></li>
+        </ul>
+        <div class="note-box">
+          <b>あらかじめご了承ください</b>
+          <ul>
+            <li>いただいたご意見・ご要望は今後の参考とさせていただきますが、対応をお約束するものではございません。</li>
+            <li>内容によっては、返信を差し上げられない場合がございます。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 ashimo</span>
+      <nav>
+        <a href="manetone/">マネトーン</a>
+        <a href="weightone/">WeighTone</a>
+        <a href="color.html">カラーラボ</a>
+        <a href="palette.html">色見本</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/form.js?v=2"></script>
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+      // アプリのページから ?app=manetone / #app=weightone で来たときは、その対象を選んだ状態に
+      const key = (location.search + location.hash).match(/app=(manetone|weightone)/)?.[1];
+      if (key) {
+        const value = key === 'manetone' ? 'マネトーン' : 'WeighTone';
+        const hit = [...document.querySelectorAll('input[name="target"]')].find(r => r.value === value);
+        if (hit) hit.checked = true;
+      }
+      if (/kind=icon/.test(location.search + location.hash)) {
+        const sel = $('cfKind');
+        const opt = [...sel.options].find(o => o.value.startsWith('アイコンの追加希望'));
+        if (opt) sel.value = opt.value;
+        $('cfBody').placeholder = '例：サウナのアイコンが欲しいです。月2回行くので、娯楽費と分けて記録したいです。';
+      }
+      const target = () => document.querySelector('input[name="target"]:checked')?.value || '';
+      window.setupMailForm({
+        form: $('contactForm'),
+        status: $('cfStatus'),
+        submit: $('cfSubmit'),
+        subject: v => `【${target()}】${v.kind}`,
+        fields: [
+          { key: 'target', label: '対象', el: { get value() { return target(); } } },
+          { key: 'kind', label: '種類', el: $('cfKind') },
+          { key: 'body', label: '内容', el: $('cfBody'), required: true },
+          { key: 'name', label: 'お名前', el: $('cfName') },
+          { key: 'email', label: '返信先メールアドレス', el: $('cfMail') },
+        ],
+      });
+    })();
+  </script>
+</body>
+</html>

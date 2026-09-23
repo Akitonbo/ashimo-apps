@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>カラーラボ｜ashimo apps</title>
+  <meta name="description" content="好きな色やグラデーションを探して微調整し、色コードをコピーしてアプリのテーマに設定できます。">
+  <link rel="stylesheet" href="assets/style.css?v=50">
+</head>
+<body data-app="weightone" data-page="color">
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>ashimo apps</a>
+      <nav class="nav">
+        <a data-nav="home" href="index.html">ホーム</a>
+        <a data-nav="manetone" href="manetone/">マネトーン</a>
+        <a data-nav="weightone" href="weightone/">WeighTone</a>
+        <a data-nav="color" href="color.html" aria-current="page"><span class="rainbow-label">カラーラボ</span></a>
+        <a data-nav="palette" href="palette.html">色見本</a>
+        <a data-nav="contact" href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="wrap">
+    <div class="lab-head">
+      <h1><span class="rainbow-label">カラーラボ</span></h1>
+      <p>3ステップで、今日のアプリの色を決めてみよう。</p>
+      <ol class="step-nav">
+        <li><a href="#step1"><span>1</span>アプリを選択</a></li>
+        <li><a href="#step2"><span>2</span>色を選ぶ</a></li>
+        <li><a href="#step3"><span>3</span>アプリに適用</a></li>
+      </ol>
+    </div>
+
+    <!-- ===== STEP 1 ===== -->
+    <section class="lab-step" id="step1">
+      <h2 class="step-title"><span class="step-no">1</span>アプリを選択する</h2>
+      <div class="app-switch" role="group" aria-label="アプリを選ぶ">
+      <div class="app-switch" role="group" aria-label="アプリを選ぶ">
+        <button type="button" data-app="manetone" aria-pressed="false"><img src="assets/icons/manetone.png" alt=""><span><b>マネトーン</b><small>基本色（1色）</small></span></button>
+        <button type="button" data-app="weightone" aria-pressed="true"><img src="assets/icons/weightone.png" alt=""><span><b>WeighTone</b><small>色・グラデーション</small></span></button>
+      </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 2 ===== -->
+    <section class="lab-step" id="step2">
+      <h2 class="step-title"><span class="step-no">2</span>色を選ぶ</h2>
+
+      <div class="lab">
+        <div class="stack">
+        <section class="card panel o-pickbox" id="pickBox">
+        <div class="pick-flow o-pick">
+        <div class="pick-row">
+          <span class="pick-label">① 色の種類</span>
+          <div class="seg seg-2" role="group" aria-label="色の種類">
+            <button type="button" data-type="solid" aria-pressed="true"><span class="seg-label">単色</span><span class="free-badge">無料</span></button>
+            <button type="button" data-type="grad" aria-pressed="false"><span class="seg-label">グラデーション</span><span class="free-badge">無料</span></button>
+          </div>
+        </div>
+
+        <div class="pick-row" id="gradKindRow" data-for="weightone" hidden>
+          <button type="button" class="pro-toggle" id="proToggle" aria-pressed="false">
+            <span class="seg-label">詳細設定</span><span class="pro-badge">Pro</span>
+          </button>
+        </div>
+        <div class="pick-row">
+          <span class="pick-label" id="pickLabel">② 色の決め方</span>
+          <div class="seg seg-2" role="group" aria-label="色の決め方">
+            <button type="button" data-pick="preset" aria-pressed="true"><span class="seg-label">見本から選ぶ</span></button>
+            <button type="button" data-pick="custom" aria-pressed="false"><span class="seg-label">自分で調整する</span></button>
+          </div>
+        </div>
+
+      </div>
+
+        <section class="panel sub-block o-gradient" id="gradientPanel">
+          <h2 id="gradPanelTitle">グラデーション</h2>
+          <div id="proEditor" hidden>
+            <div class="stop-bar" id="stopBar" aria-label="グラデーションバー（クリックで色を追加、ツマミをドラッグで移動）">
+              <div class="stop-bar-fill" id="stopBarFill"></div>
+            </div>
+            <div class="stop-tools">
+              <label class="howto">選択中の位置
+                <input type="number" id="stopPos" min="0" max="100" step="1"> %
+              </label>
+              <div style="display:flex;gap:6px" data-for="weightone">
+                <button type="button" class="btn btn-sm" id="flipBtn" title="左右を反転">⇄ 反転</button>
+                <button type="button" class="btn btn-sm" id="removeStopBtn">削除</button>
+              </div>
+            </div>
+
+            <div data-for="manetone" class="mane-extra">
+              <button type="button" class="base-chip" id="baseChip">
+                <span class="bc-dot" id="baseChipDot"></span>
+                <span>基本色（文字・アイコンなどの色）を編集</span>
+              </button>
+              <button type="button" class="btn btn-sm" id="autoStopsBtn">基本色から自動で作る</button>
+            </div>
+          </div>
+
+          <div id="angleBlock" data-for="weightone" hidden>
+            <h3 class="sub-h">方向</h3>
+            <div class="angle-row" id="angleRow"></div>
+          </div>
+
+          <div id="presetBlock">
+            <h3 class="sub-h">グラデーションのプリセット</h3>
+            <div class="grad-presets" id="gradPresets"></div>
+          </div>
+        </section>
+
+<section class="panel sub-block o-sliders" id="sliderPanel">
+          <h2>
+            微調整
+            <span class="mode-tabs" role="group" aria-label="スライダーの種類">
+              <button type="button" data-mode="hsl" aria-pressed="true">色相・彩度・明度</button>
+              <button type="button" data-mode="rgb" aria-pressed="false">RGB</button>
+            </span>
+          </h2>
+          <div id="spectrumBox">
+            <div class="spectrum" id="spectrum" aria-label="スペクトラム（ドラッグで色を選ぶ）">
+              <div class="sp-cursor" id="spCursor"></div>
+            </div>
+            <input type="range" class="sp-hue" id="spHue" min="0" max="360" step="1" aria-label="色相">
+          </div>
+          <div id="hslSliders">
+            <div class="slider-row"><label for="h">色相</label><input type="range" id="h" min="0" max="360" step="1"><input type="number" id="hN" min="0" max="360"></div>
+            <div class="slider-row"><label for="s">彩度</label><input type="range" id="s" min="0" max="100" step="1"><input type="number" id="sN" min="0" max="100"></div>
+            <div class="slider-row"><label for="l">明度</label><input type="range" id="l" min="0" max="100" step="1"><input type="number" id="lN" min="0" max="100"></div>
+          </div>
+          <div id="rgbSliders" hidden>
+            <div class="slider-row"><label for="r">R</label><input type="range" id="r" min="0" max="255" step="1"><input type="number" id="rN" min="0" max="255"></div>
+            <div class="slider-row"><label for="g">G</label><input type="range" id="g" min="0" max="255" step="1"><input type="number" id="gN" min="0" max="255"></div>
+            <div class="slider-row"><label for="b">B</label><input type="range" id="b" min="0" max="255" step="1"><input type="number" id="bN" min="0" max="255"></div>
+          </div>
+        </section>
+
+        <section class="panel sub-block o-palette" id="palettePanel">
+          <h2>色を探す</h2>
+          <div class="pal-tabs" id="palTabs"></div>
+          <div class="chips" id="palette"></div>
+        </section>
+
+        <section class="panel sub-block o-tints" id="tintPanel">
+          <h2>明るさのバリエーション</h2>
+          <div class="scale" id="tints"></div>
+        </section>
+
+        <section class="panel sub-block o-codes" id="codePanel">
+          <h2>色コード <small style="font-weight:400;color:var(--text-sub)">直接入力もOK</small></h2>
+          <div class="code-row"><span>色コード</span><input id="hexIn" spellcheck="false" autocomplete="off"><button class="btn btn-sm" data-copy="hex">コピー</button></div>
+          <details class="more-codes">
+            <summary>ほかの書き方（RGB・HSL）</summary>
+            <div class="code-row"><span>RGB</span><input id="rgbIn" spellcheck="false" autocomplete="off"><button class="btn btn-sm" data-copy="rgb">コピー</button></div>
+            <div class="code-row"><span>HSL</span><input id="hslIn" spellcheck="false" autocomplete="off"><button class="btn btn-sm" data-copy="hsl">コピー</button></div>
+          </details>
+        </section>
+
+        <section class="panel sub-block o-favs" id="favPanel">
+          <h2>お気に入り <button class="btn btn-sm" id="favClearAll">すべて削除</button></h2>
+          <div class="chips" id="favs"></div>
+          <p class="howto" id="favEmpty" style="margin:0">「☆ お気に入りに追加」で色を保存できます。保存先はこのブラウザ内なので、同じ端末の同じブラウザならページを閉じても残ります。</p>
+        </section>
+        </section>
+        </div>
+
+        <div class="stack">
+        <div class="side-sticky">
+        <div class="swatch-big o-swatch" id="swatch">
+          <div class="swatch-top">
+            <span class="name" id="swatchName">ベースカラー</span>
+          </div>
+          <div>
+            <div class="hex" id="swatchHex">#7B5CFF</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <button class="btn btn-sm" data-copy="hex">色コードをコピー</button>
+              <button class="btn btn-sm" id="favAdd">☆ お気に入りに追加</button>
+              <button class="btn btn-sm" id="randomBtn">🎲 ランダム</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="card panel o-preview" id="previewPanel">
+          <h2>
+            <span id="previewTitle">アプリでの見え方</span>
+            <span class="mode-tabs" role="group" aria-label="背景" data-for="weightone">
+              <button type="button" data-base="light" aria-pressed="false">白</button>
+              <button type="button" data-base="gray" aria-pressed="false">グレー</button>
+              <button type="button" data-base="dark" aria-pressed="true">黒</button>
+            </span>
+            <span class="mode-tabs" role="group" aria-label="背景色" data-for="manetone">
+              <button type="button" data-mbase="light" aria-pressed="true">白</button>
+              <button type="button" data-mbase="gray" aria-pressed="false">グレー</button>
+              <button type="button" data-mbase="dark" aria-pressed="false">黒</button>
+            </span>
+          </h2>
+          <button type="button" class="preview-close" id="previewClose" aria-label="プレビューを閉じる">×</button>
+          <div class="preview-row">
+            <div class="device-row"><div class="device" id="device"></div></div>
+            <div class="grad-strip" id="gradStrip" hidden>
+              <span class="gs-note" id="gradStripNote"></span>
+            </div>
+          </div>
+          <p class="howto" style="margin:12px 0 0" id="previewNote"></p>
+        </section>
+        </div>
+
+        
+
+        
+
+        
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 3 ===== -->
+    <section class="lab-step" id="step3">
+      <h2 class="step-title"><span class="step-no">3</span>アプリに適用する</h2>
+      <p class="step-lead">下の色コードをコピーして、アプリの設定に貼り付ければ完了です。</p>
+      <div class="grid-2">
+        <section class="card panel apply-card">
+          <h2>アプリに反映する</h2>
+          <p class="howto" style="margin:0 0 14px">スマホでこのページを見ているときは、ボタンからアプリを開いてそのまま反映できます。パソコンのときは、QRコードをスマホで読み取ってください。</p>
+          <div class="apply-stack">
+            <a class="btn btn-primary" id="applyBtn" href="#">アプリに反映する</a>
+            <div class="apply-qr">
+              <div id="qrBox"></div>
+              <span class="howto">パソコンのときは、このQRコードをスマホで読み取ってください</span>
+            </div>
+            <p class="howto" id="applyNote" style="margin:0"></p>
+            <a class="btn btn-sm" id="storeBtn" href="#">アプリをダウンロード</a>
+            <details class="apply-link">
+              <summary>反映用のリンク（開発用）</summary>
+              <code id="applyUrl"></code>
+            </details>
+          </div>
+        </section>
+
+        <section class="card panel">
+          <h2>使っている色 <button type="button" class="btn btn-sm" id="copyStops">まとめてコピー</button></h2>
+          <div id="stopList"></div>
+        </section>
+
+        <section class="card panel o-howto howto" id="howto">
+          <h2>アプリへの反映方法</h2>
+          <div data-for="weightone">
+            <div data-howto="solid auto">
+              <ol>
+                <li>「色コードをコピー」を押す</li>
+                <li>アプリの「設定 → テーマ」でカスタムカラーを開く</li>
+                <li>「スライダ」タブの「sRGB 16進数カラー値」に貼り付け</li>
+                <li id="howtoToggle">「グラデーションにする」をONにする</li>
+              </ol>
+              <p style="margin:8px 0 0">「単色」「グラデーションおまかせ」は<strong>無料</strong>で設定できます。</p>
+            </div>
+            <div data-howto="pro" hidden>
+              <ol>
+                <li>カスタムカラーで「グラデーションにする」をONにする</li>
+                <li>グラデーションの詳細設定のバーをタップして、上の「使っている色」と同じ数・同じ位置にツマミを置く</li>
+                <li>ツマミをタップして選び、「スライダ」タブの「sRGB 16進数カラー値」に色コードを貼り付け</li>
+                <li>「方向」で同じ矢印を選ぶ</li>
+              </ol>
+              <p style="margin:8px 0 0">「グラデーション詳細設定」は <strong>Pro版</strong> の機能です。</p>
+            </div>
+          </div>
+          <div data-for="manetone">
+            <div data-mhowto="solid">
+              <ol>
+                <li>「色コードをコピー」を押す</li>
+                <li>アプリの「設定 → 基本色」を開く</li>
+                <li>「貼り付け」をタップすると反映されます</li>
+                <li>「グラデーション」はOFFのままにします</li>
+              </ol>
+            </div>
+            <div data-mhowto="grad" hidden>
+              <ol>
+                <li>アプリの「設定 → 基本色」で「グラデーション」をONにする</li>
+                <li>バーの丸をタップして選び、左右にドラッグして上の「使っている色」と同じ位置に合わせる</li>
+                <li>選んだ丸の色を、コピーした色コードから「貼り付け」で反映する（3色ぶん）</li>
+                <li>文字・アイコンの色は「基本色」で別に設定します</li>
+              </ol>
+              <p style="margin:8px 0 0">マネトーンのグラデーションは<strong>無料</strong>、向きは上から下のみです。</p>
+            </div>
+          </div>
+          <p style="margin:10px 0 0">このページのURLには色が含まれるので、URLを共有すると同じ色・グラデーションを開けます。</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="mobile-bar" id="mobileBar" aria-hidden="true">
+    <span class="mb-chip" id="mbChip"></span>
+    <code id="mbHex">#000000</code>
+    <button type="button" class="btn btn-sm" id="previewToggle">画面を大きく</button>
+    <button type="button" class="btn btn-sm btn-primary" data-copy="hex"><span class="rainbow-label">コピー</span></button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 ashimo</span>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="manetone/">マネトーン</a>
+        <a href="weightone/">WeighTone</a>
+        <a href="palette.html">色見本</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <script src="assets/palettes.js?v=1"></script>
+  <script src="assets/color.js?v=35"></script>
+</body>
+</html>

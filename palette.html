@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>色見本｜ashimo apps</title>
+  <meta name="description" content="和色・パステル・くすみなど239色の色見本。好きな色を選んで微調整し、色コード（HEX・RGB・HSL）をコピーできます。">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=50">
+</head>
+<body data-page="palette">
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>ashimo apps</a>
+      <nav class="nav">
+        <a data-nav="home" href="index.html">ホーム</a>
+        <a data-nav="manetone" href="manetone/">マネトーン</a>
+        <a data-nav="weightone" href="weightone/">WeighTone</a>
+        <a data-nav="color" href="color.html"><span class="rainbow-label">カラーラボ</span></a>
+        <a data-nav="palette" href="palette.html" aria-current="page">色見本</a>
+        <a data-nav="contact" href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="lab-head">
+      <h1>色見本</h1>
+      <p>239色の中から選んで、微調整して、色コードをコピーできます。</p>
+    </div>
+
+    <div class="lab">
+      <div class="stack">
+        <section class="card panel" id="pickBox">
+          <div class="pick-flow o-pick">
+            <div class="pick-row">
+              <div class="seg seg-2" role="group" aria-label="選び方">
+                <button type="button" data-pick="preset" aria-pressed="true"><span class="seg-label">見本から選ぶ</span></button>
+                <button type="button" data-pick="custom" aria-pressed="false"><span class="seg-label">自分で調整する</span></button>
+              </div>
+            </div>
+          </div>
+
+          <section class="panel sub-block" id="palettePanel">
+            <div class="pal-tabs" id="palTabs"></div>
+            <div class="chips" id="palette"></div>
+          </section>
+
+          <section class="panel sub-block" id="sliderPanel" hidden>
+            <h2>
+              微調整
+              <span class="mode-tabs" role="group" aria-label="スライダーの種類">
+                <button type="button" data-mode="hsl" aria-pressed="true">色相・彩度・明度</button>
+                <button type="button" data-mode="rgb" aria-pressed="false">RGB</button>
+              </span>
+            </h2>
+            <div id="spectrumBox">
+              <div class="spectrum" id="spectrum" aria-label="スペクトラム（ドラッグで色を選ぶ）">
+                <div class="sp-cursor" id="spCursor"></div>
+              </div>
+              <input type="range" class="sp-hue" id="spHue" min="0" max="360" step="1" aria-label="色相">
+            </div>
+            <div id="hslSliders">
+              <div class="slider-row"><label for="h">色相</label><input type="range" id="h" min="0" max="360" step="1"><input type="number" id="hN" min="0" max="360"></div>
+              <div class="slider-row"><label for="s">彩度</label><input type="range" id="s" min="0" max="100" step="1"><input type="number" id="sN" min="0" max="100"></div>
+              <div class="slider-row"><label for="l">明度</label><input type="range" id="l" min="0" max="100" step="1"><input type="number" id="lN" min="0" max="100"></div>
+            </div>
+            <div id="rgbSliders" hidden>
+              <div class="slider-row"><label for="r">R</label><input type="range" id="r" min="0" max="255" step="1"><input type="number" id="rN" min="0" max="255"></div>
+              <div class="slider-row"><label for="g">G</label><input type="range" id="g" min="0" max="255" step="1"><input type="number" id="gN" min="0" max="255"></div>
+              <div class="slider-row"><label for="b">B</label><input type="range" id="b" min="0" max="255" step="1"><input type="number" id="bN" min="0" max="255"></div>
+            </div>
+          </section>
+
+          <section class="panel sub-block" id="tintPanel">
+            <h2>薄さ・濃さのバリエーション <small style="font-weight:400;color:var(--text-sub)">押すとその色に切り替わります</small></h2>
+            <div class="scale" id="tints"></div>
+          </section>
+
+          <section class="panel sub-block" id="favPanel">
+            <h2>お気に入り <button class="btn btn-sm" id="favClearAll">すべて削除</button></h2>
+            <div class="chips" id="favs"></div>
+            <p class="howto" id="favEmpty" style="margin:0">「☆ お気に入りに追加」で色を保存できます。保存先はこのブラウザ内なので、同じ端末の同じブラウザならページを閉じても残ります。</p>
+          </section>
+        </section>
+      </div>
+
+      <div class="stack">
+        <div class="side-sticky">
+          <div class="swatch-big o-swatch" id="swatch">
+            <div class="swatch-top">
+              <span class="name" id="swatchName">色見本</span>
+            </div>
+            <div>
+              <div class="hex" id="swatchHex">#7B5CFF</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                <button class="btn btn-sm" data-copy="hex">色コードをコピー</button>
+                <button class="btn btn-sm" id="favAdd">☆ お気に入りに追加</button>
+                <button class="btn btn-sm" id="randomBtn">🎲 ランダム</button>
+              </div>
+            </div>
+          </div>
+
+          <section class="card panel" id="codePanel">
+            <h2>色コード <small style="font-weight:400;color:var(--text-sub)">直接入力もOK</small></h2>
+            <div class="code-row"><span>HEX</span><input id="hexIn" spellcheck="false" autocomplete="off"><button class="btn btn-sm" data-copy="hex">コピー</button></div>
+            <div class="code-row"><span>RGB</span><input id="rgbIn" spellcheck="false" autocomplete="off"><button class="btn btn-sm" data-copy="rgb">コピー</button></div>
+            <div class="code-row"><span>HSL</span><input id="hslIn" spellcheck="false" autocomplete="off"><button class="btn btn-sm" data-copy="hsl">コピー</button></div>
+          </section>
+
+          <section class="card panel" id="contrastPanel">
+            <h2>文字の読みやすさ</h2>
+            <div class="contrast-grid">
+              <div class="contrast-box" id="cWhite"></div>
+              <div class="contrast-box" id="cBlack"></div>
+            </div>
+            <p class="howto" style="margin:10px 0 0">コントラスト比 4.5 以上で「AA」＝読みやすい目安です（WCAG基準）。</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="mobile-bar" id="mobileBar" aria-hidden="true">
+    <span class="mb-chip" id="mbChip"></span>
+    <code id="mbHex">#000000</code>
+    <button type="button" class="btn btn-sm btn-primary" data-copy="hex">コピー</button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 ashimo</span>
+      <nav>
+        <a href="index.html">ホーム</a>
+        <a href="color.html">カラーラボ</a>
+        <a href="palette.html">色見本</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/palettes.js?v=1"></script>
+  <script src="assets/palette.js?v=1"></script>
+</body>
+</html>
