@@ -8,7 +8,7 @@
   //    例: const FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxxx';
   // 空のままでも、送信ボタンでメールアプリが開く形で動きます。
   const FORM_ENDPOINT = '';
-  const MAIL_TO = 'ashitanomotode@gmail.com';
+  const MAIL_TO = 'info@ashitanomotode.com';
 
   // opts = { form, status, submit, subject(values), fields: [{key, label, el, required}] }
   window.setupMailForm = function setupMailForm(opts) {

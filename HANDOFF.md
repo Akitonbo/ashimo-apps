@@ -56,7 +56,7 @@ python3 -m http.server 8765
    - 各紹介ページの「App Storeで見る」ボタン（現在 `href="#"`）
 2. **お問い合わせの送信先**
    - `assets/form.js` の `FORM_ENDPOINT` に Formspree 等のURLを設定
-   - 未設定の間は、送信ボタンでメールアプリが開く（宛先 ashitanomotode@gmail.com）
+   - 未設定の間は、送信ボタンでメールアプリが開く（宛先 info@ashitanomotode.com）
 3. **アプリ側のディープリンク対応**（カラーラボの「アプリに反映する」）
    - マネトーン: `manetone://theme?mode=solid|grad&base=RRGGBB&stops=RRGGBB-位置,...`
      （app.json に `"scheme": "manetone"` の追加と再ビルドが必要）
