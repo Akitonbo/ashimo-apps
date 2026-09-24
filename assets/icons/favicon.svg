@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ashimo apps">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFCE65"/>
+      <stop offset="0.25" stop-color="#FF8A5C"/>
+      <stop offset="0.5" stop-color="#E25A8D"/>
+      <stop offset="0.75" stop-color="#874CFE"/>
+      <stop offset="1" stop-color="#03E5FD"/>
+    </linearGradient>
+    <clipPath id="sky"><rect x="0" y="0" width="512" height="338"/></clipPath>
+  </defs>
+  <rect width="512" height="512" fill="url(#g)"/>
+  <circle cx="256" cy="297" r="133" fill="#fff" clip-path="url(#sky)"/>
+  <rect x="0" y="325" width="512" height="26" fill="#fff"/>
+  <rect x="179" y="382" width="154" height="23" rx="11.5" fill="#fff"/>
+  <rect x="210" y="444" width="92" height="23" rx="11.5" fill="#fff"/>
+</svg>
