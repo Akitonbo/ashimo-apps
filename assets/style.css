@@ -1294,3 +1294,35 @@ body[data-app="weightone"] .pro-toggle[aria-pressed="true"] {
 body[data-page="palette"] #pickBox .pick-flow { justify-content: flex-start; }
 body[data-page="palette"] .side-sticky { gap: 14px; }
 @media (min-width: 861px) { body[data-page="palette"] .side-sticky { position: sticky; top: 76px; } }
+
+/* ===== ヘッダー：色見本もカラーラボと同じレインボー扱い ===== */
+.nav a[data-nav="palette"][aria-current="page"],
+.nav a[data-nav="palette"]:hover {
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    var(--rainbow-pale) border-box;
+  border: 1.5px solid transparent;
+  color: var(--text);
+}
+.nav a[data-nav="palette"]:hover .rainbow-label,
+.nav a[data-nav="palette"][aria-current="page"] .rainbow-label {
+  -webkit-text-fill-color: transparent; color: transparent;
+  background-image: var(--rainbow-pale);
+}
+
+/* ===== スマホ：メニュー5項目を1画面に収める（横スクロールなし） ===== */
+@media (max-width: 600px) {
+  .nav { gap: 2px; overflow-x: visible; margin-inline: 0; justify-content: space-between; }
+  .nav a { padding: 6px 7px; font-size: 12.5px; }
+}
+@media (max-width: 400px) {
+  .nav { gap: 0; }
+  .nav a { padding: 6px 4px; font-size: 11.5px; letter-spacing: -.01em; }
+}
+@media (max-width: 345px) {
+  .nav a { padding: 5px 2px; font-size: 10.5px; letter-spacing: -.02em; }
+}
+
+/* 端末モックの高さを2アプリで揃える（WeighToneの高さが基準。
+   中身が少ないマネトーンは本文側が伸びてタブバーが下端に残る） */
+.device { aspect-ratio: 300 / 556; }
