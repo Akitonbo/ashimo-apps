@@ -1296,6 +1296,12 @@ body[data-page="palette"] .side-sticky { gap: 14px; }
 @media (min-width: 861px) { body[data-page="palette"] .side-sticky { position: sticky; top: 76px; } }
 
 /* ===== ヘッダー：色見本もカラーラボと同じレインボー扱い ===== */
+/* ふだんは他の項目と同じ文字色。選択中とカーソルを合わせたときだけレインボー */
+.nav a[data-nav="palette"] .rainbow-label {
+  background-image: none;
+  -webkit-text-fill-color: currentColor; color: inherit;
+  font-weight: inherit;
+}
 .nav a[data-nav="palette"][aria-current="page"],
 .nav a[data-nav="palette"]:hover {
   background:
@@ -1308,6 +1314,7 @@ body[data-page="palette"] .side-sticky { gap: 14px; }
 .nav a[data-nav="palette"][aria-current="page"] .rainbow-label {
   -webkit-text-fill-color: transparent; color: transparent;
   background-image: var(--rainbow-pale);
+  font-weight: 800;
 }
 
 /* ===== スマホ：メニュー5項目を1画面に収める（横スクロールなし） ===== */
@@ -1326,3 +1333,6 @@ body[data-page="palette"] .side-sticky { gap: 14px; }
 /* 端末モックの高さを2アプリで揃える（WeighToneの高さが基準。
    中身が少ないマネトーンは本文側が伸びてタブバーが下端に残る） */
 .device { aspect-ratio: 300 / 556; }
+
+/* トップの3ステップ：番号の色をカラーラボのステップ表示と揃える */
+.steps .step::before { background: var(--tint-rainbow); color: var(--tint-text); }
