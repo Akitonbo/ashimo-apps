@@ -841,7 +841,11 @@
       const others = (side?.scrollHeight ?? natH) - natH;   // 色見本・見出し・余白のぶん
       scale = Math.max(0.45, Math.min(1, (window.innerHeight - 84 - others) / natH));
     } else if (document.body.classList.contains('preview-open')) {
-      scale = Math.min((window.innerWidth - 64) / NAT_WIDTH, (window.innerHeight * 0.6) / natH, 0.95);
+      // パネルの高さ上限（72vh）から、見出し・注記・余白のぶんを引いた残りに収める
+      const panel = dev.closest('#previewPanel');
+      const others = panel ? Math.max(0, panel.scrollHeight - natH) : 0;
+      const avail = Math.max(160, window.innerHeight * 0.82 - others - 12);
+      scale = Math.min((window.innerWidth - 64) / NAT_WIDTH, avail / natH, 0.95);
     } else {
       scale = MINI_WIDTH / NAT_WIDTH;
     }
@@ -849,6 +853,7 @@
     dev.style.transform = `scale(${scale.toFixed(3)})`;
     row.style.width = Math.round(NAT_WIDTH * scale) + 'px';
     row.style.height = Math.round(natH * scale) + 'px';
+    document.body.classList.add('preview-ready');   // 縮小が決まってから表示する
   }
 
   let fitTimer;

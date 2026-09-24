@@ -1336,3 +1336,18 @@ body[data-page="palette"] .side-sticky { gap: 14px; }
 
 /* トップの3ステップ：番号の色をカラーラボのステップ表示と揃える */
 .steps .step::before { background: var(--tint-rainbow); color: var(--tint-text); }
+
+/* 端末モックは常に幅300pxで描画し、見た目の大きさは transform: scale() だけで変える。
+   （幅を変えると中身の高さも変わり、2アプリの高さを揃えられなくなるため） */
+body.preview-open #previewPanel .device {
+  width: 300px !important; max-width: none !important;
+  flex: none;   /* 拡大時は .device-row が flex になるため、縮まないように固定 */
+}
+.device { min-height: max-content; }   /* 万一中身が超えても切れないように */
+
+/* 初回描画で、縮小前の等倍サイズが一瞬見えるのを防ぐ */
+#previewPanel .device { visibility: hidden; }
+body.preview-ready #previewPanel .device { visibility: visible; }
+
+/* 拡大表示：端末画面を大きく見せるため、パネルの高さ上限を少し広げる */
+body.preview-open #previewPanel { max-height: 82vh; }
