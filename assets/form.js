@@ -7,7 +7,7 @@
   // ② 発行された URL を FORM_ENDPOINT に貼り付ける
   //    例: const FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxxx';
   // 空のままでも、送信ボタンでメールアプリが開く形で動きます。
-  const FORM_ENDPOINT = '';
+  const FORM_ENDPOINT = 'https://formspree.io/f/mdeklbaj';
   const MAIL_TO = 'info@ashitanomotode.com';
 
   // opts = { form, status, submit, subject(values), fields: [{key, label, el, required}] }
