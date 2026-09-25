@@ -1367,3 +1367,6 @@ body.preview-open #previewPanel { max-height: 82vh; }
 .custom-toggle::after { content: "▾"; font-size: 11px; }
 .custom-toggle[aria-expanded="true"]::after { content: "▴"; }
 .custom-toggle:hover { color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+
+/* ヒーローの導入文：PCでは意図した位置で改行、スマホでは自然に折り返させる */
+@media (max-width: 600px) { .hero p br { display: none; } }
