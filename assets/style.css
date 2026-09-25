@@ -1345,9 +1345,25 @@ body.preview-open #previewPanel .device {
 }
 .device { min-height: max-content; }   /* 万一中身が超えても切れないように */
 
-/* 初回描画で、縮小前の等倍サイズが一瞬見えるのを防ぐ */
+/* 初回描画で、縮小前の等倍サイズが一瞬見えるのを防ぐ。
+   visibility だけだと領域は確保されたままで、白いカードが端末サイズに広がって見えるので、
+   縮小率が決まるまでは置き場所の高さも 0 にしておく */
 #previewPanel .device { visibility: hidden; }
 body.preview-ready #previewPanel .device { visibility: visible; }
+body:not(.preview-ready) #previewPanel { visibility: hidden; }
+body:not(.preview-ready) #previewPanel .device-row { height: 0; overflow: hidden; }
 
 /* 拡大表示：端末画面を大きく見せるため、パネルの高さ上限を少し広げる */
 body.preview-open #previewPanel { max-height: 82vh; }
+
+/* 色見本：濃度調整の下に置く「自分で調整する」タブ */
+.custom-toggle {
+  margin-top: 14px; width: 100%; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface-2); color: var(--text-sub);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.custom-toggle::after { content: "▾"; font-size: 11px; }
+.custom-toggle[aria-expanded="true"]::after { content: "▴"; }
+.custom-toggle:hover { color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,.08); }

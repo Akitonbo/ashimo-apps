@@ -11,9 +11,9 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151412">
   <title>色見本｜ashimo apps</title>
-  <meta name="description" content="和色・パステル・くすみなど239色の色見本。好きな色を選んで微調整し、色コード（HEX・RGB・HSL）をコピーできます。">
+  <meta name="description" content="和色・パステル・くすみなど、たくさんの色見本。好きな色を選んで微調整し、色コード（HEX・RGB・HSL）をコピーできます。">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="assets/style.css?v=57">
+  <link rel="stylesheet" href="assets/style.css?v=58">
 </head>
 <body data-page="palette">
   <header class="site-header">
@@ -31,8 +31,8 @@
 
   <main class="wrap">
     <div class="lab-head">
-      <h1>色見本</h1>
-      <p>239色の中から選んで、微調整して、色コードをコピーできます。</p>
+      <h1><span class="rainbow-label">色見本</span></h1>
+      <p>好きな色を選んで微調整して、色コードをコピーできます。</p>
     </div>
 
     <div class="lab">
@@ -52,6 +52,12 @@
             <div class="chips" id="palette"></div>
           </section>
 
+
+          <section class="panel sub-block" id="tintPanel">
+            <h2>濃度調整 <small style="font-weight:400;color:var(--text-sub)">押すとその色に切り替わります</small></h2>
+            <div class="scale" id="tints"></div>
+            <button type="button" class="custom-toggle" id="customToggle" aria-expanded="false">自分で調整する</button>
+          </section>
           <section class="panel sub-block" id="sliderPanel" hidden>
             <h2>
               微調整
@@ -76,11 +82,6 @@
               <div class="slider-row"><label for="g">G</label><input type="range" id="g" min="0" max="255" step="1"><input type="number" id="gN" min="0" max="255"></div>
               <div class="slider-row"><label for="b">B</label><input type="range" id="b" min="0" max="255" step="1"><input type="number" id="bN" min="0" max="255"></div>
             </div>
-          </section>
-
-          <section class="panel sub-block" id="tintPanel">
-            <h2>薄さ・濃さのバリエーション <small style="font-weight:400;color:var(--text-sub)">押すとその色に切り替わります</small></h2>
-            <div class="scale" id="tints"></div>
           </section>
 
           <section class="panel sub-block" id="favPanel">
@@ -148,6 +149,6 @@
   </footer>
 
   <script src="assets/palettes.js?v=1"></script>
-  <script src="assets/palette.js?v=38"></script>
+  <script src="assets/palette.js?v=39"></script>
 </body>
 </html>

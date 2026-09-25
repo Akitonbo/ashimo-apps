@@ -147,7 +147,13 @@
     document.querySelectorAll('[data-pick]').forEach(b => b.setAttribute('aria-pressed', b.dataset.pick === state.pick));
     $('palettePanel').hidden = !preset;
     $('favPanel').hidden = !preset;
-    $('sliderPanel').hidden = preset;
+    $('tintPanel').hidden = !preset;
+    // 見本から選ぶときは「自分で調整する」を押したときだけスライダーを出す
+    $('sliderPanel').hidden = preset && !state.openCustom;
+    const ct = $('customToggle');
+    ct.hidden = !preset;
+    ct.setAttribute('aria-expanded', String(!!state.openCustom));
+    ct.textContent = state.openCustom ? '自分で調整する を閉じる' : '自分で調整する';
 
     document.querySelectorAll('#palette .chip, #favs .chip').forEach(c => c.classList.toggle('is-current', c.dataset.hex === hex));
     history.replaceState(null, '', '#' + hex.slice(1));
@@ -267,7 +273,9 @@
     if (copyBtn) return copy(state.codes[copyBtn.dataset.copy]);
 
     const pk = t.closest('[data-pick]');
-    if (pk) { state.pick = pk.dataset.pick; return render(); }
+    if (pk) { state.pick = pk.dataset.pick; state.openCustom = false; return render(); }
+
+    if (t.closest('#customToggle')) { state.openCustom = !state.openCustom; return render(); }
 
     const remove = t.closest('[data-remove]');
     if (remove) {
