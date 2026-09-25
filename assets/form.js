@@ -44,7 +44,10 @@
       submit.disabled = true;
       say('送信中…');
       try {
-        const payload = { _subject: subject, email: v.email || '' };
+        // email は空のまま送るとスパム判定されやすいので、入力があるときだけ含める。
+        // _gotcha（空のハニーポット）は「人間が送った」判断材料になる。
+        const payload = { _subject: subject, _gotcha: '' };
+        if (v.email) payload.email = v.email;
         fields.forEach(f => { if (f.key !== 'email') payload[f.label] = v[f.key]; });
         const res = await fetch(FORM_ENDPOINT, {
           method: 'POST',
