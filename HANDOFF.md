@@ -26,7 +26,7 @@
 ```
 index.html            トップ（アプリ紹介・色の反映手順）
 color.html            カラーラボ（アプリの色を決める。3ステップ構成）
-palette.html          色見本（アプリとは無関係の色選びツール）
+palette.html          パレット（アプリとは無関係の色選びツール）
 contact.html          お問い合わせフォーム
 manetone/index.html   マネトーン紹介
 manetone/icons.html   マネトーンのアイコン一覧（96種）
@@ -37,7 +37,7 @@ weightone/terms.html  WeighTone 利用規約
 weightone/privacy.html WeighTone プライバシーポリシー
 assets/style.css      全ページ共通のスタイル
 assets/color.js       カラーラボの処理
-assets/palette.js     色見本ページの処理
+assets/palette.js     パレットページの処理
 assets/palettes.js    色見本データ（11グループ239色。両ページで共用）
 assets/icons.js       アイコン一覧ページの処理
 assets/form.js        フォーム送信の共通処理

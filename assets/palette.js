@@ -1,4 +1,4 @@
-/* 色見本ページ：色を選ぶ・微調整する・色コードをコピーする */
+/* パレットページ：色を選ぶ・微調整する・色コードをコピーする */
 (() => {
   'use strict';
 
@@ -7,7 +7,7 @@
   const $ = id => document.getElementById(id);
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-  const state = { hsl: { h: 251, s: 100, l: 68 }, name: '色見本', pick: 'preset' };
+  const state = { hsl: { h: 251, s: 100, l: 68 }, name: 'パレット', pick: 'preset' };
   let currentPal = Object.keys(PALETTES)[0];
   let favorites = loadFavs();
 
