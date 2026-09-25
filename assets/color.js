@@ -691,7 +691,7 @@
   //   例) weighttrackerapp://theme?mode=pro&angle=90&stops=DA5272-0,F4B3C2-50,FADFDB-100
   const APP_SCHEME = { manetone: 'manetone', weightone: 'weighttrackerapp' };
   // App Store の公開後に、ここへストアのURLを貼り付けてください
-  const STORE_URL = { manetone: '', weightone: '' };
+  const STORE_URL = { manetone: 'https://apps.apple.com/jp/app/id6796136285', weightone: '' };
   // アプリ側がディープリンク（上記スキーム）に対応したバージョンを配信したら true にする。
   // false の間は「アプリに反映する」ボタンとQRコードを無効化し、色コードのコピー運用を案内する。
   const APP_LINK_READY = false;
