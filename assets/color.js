@@ -838,8 +838,14 @@
 
     let scale;
     if (!isNarrow()) {
-      const others = (side?.scrollHeight ?? natH) - natH;   // 色見本・見出し・余白のぶん
-      scale = Math.max(0.45, Math.min(1, (window.innerHeight - 84 - others) / natH));
+      // 右の列（ベースカラー＋アプリ画面）が、どの画面の高さでも丸ごと収まるようにする。
+      // 端末以外の高さ（ベースカラーのカード・見出し・余白）を引いた残りに端末を入れ、
+      // 横は列の幅を超えないようにする。画面が広いときは等倍より大きく表示する。
+      const top = parseFloat(getComputedStyle(side || dev).top) || 68;
+      const others = (side?.scrollHeight ?? natH) - natH;
+      const avail = window.innerHeight - top - 16 - others;
+      const byWidth = (side?.clientWidth ?? NAT_WIDTH) / NAT_WIDTH;
+      scale = Math.max(0.35, Math.min(1.5, avail / natH, byWidth));
     } else if (document.body.classList.contains('preview-open')) {
       // パネルの高さ上限（72vh）から、見出し・注記・余白のぶんを引いた残りに収める
       const panel = dev.closest('#previewPanel');
