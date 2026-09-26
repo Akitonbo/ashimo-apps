@@ -839,13 +839,13 @@
     let scale;
     if (!isNarrow()) {
       // 右の列（ベースカラー＋アプリ画面）が、どの画面の高さでも丸ごと収まるようにする。
-      // 端末以外の高さ（ベースカラーのカード・見出し・余白）を引いた残りに端末を入れ、
-      // 横は列の幅を超えないようにする。画面が広いときは等倍より大きく表示する。
+      // 端末以外の高さ（ベースカラーのカード・見出し・余白）を引いた残りに端末を入れる。
+      // 等倍より大きくはしない（拡大すると、右の列が画面に貼り付く前の位置で
+      // かえって下が見切れてしまうため）。
       const top = parseFloat(getComputedStyle(side || dev).top) || 68;
       const others = (side?.scrollHeight ?? natH) - natH;
       const avail = window.innerHeight - top - 16 - others;
-      const byWidth = (side?.clientWidth ?? NAT_WIDTH) / NAT_WIDTH;
-      scale = Math.max(0.35, Math.min(1.5, avail / natH, byWidth));
+      scale = Math.max(0.35, Math.min(1, avail / natH));
     } else if (document.body.classList.contains('preview-open')) {
       // パネルの高さ上限（72vh）から、見出し・注記・余白のぶんを引いた残りに収める
       const panel = dev.closest('#previewPanel');
@@ -864,6 +864,9 @@
 
   let fitTimer;
   window.addEventListener('resize', () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitPreview, 120); });
+  // 初回は画像やフォントの読み込みで高さが変わるため、確定してからもう一度測り直す
+  window.addEventListener('load', fitPreview);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPreview);
 
   // ===== スマホ：アプリ画面プレビューの開閉 =====
   const isNarrow = () => window.matchMedia('(max-width: 860px)').matches;
