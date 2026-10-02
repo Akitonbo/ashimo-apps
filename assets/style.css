@@ -1396,7 +1396,20 @@ body.preview-open #previewPanel { max-height: 82vh; }
   display: inline-flex; flex: none; line-height: 0; border-radius: 50%;
   margin-right: auto;
 }
+.author-link { position: relative; }
 .author-link img { width: 30px; height: 30px; border-radius: 50%; display: block; }
 .author-link:hover { opacity: .82; }
 .author-link:focus-visible { outline: 2px solid var(--text-sub); outline-offset: 2px; }
-@media (max-width: 600px) { .author-link img { width: 26px; height: 26px; } }
+/* Xへのリンクだとわかるよう、右下に小さなバッジを重ねる */
+.author-badge {
+  position: absolute; right: -3px; bottom: -3px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: #000; border: 2px solid var(--bg);
+  display: grid; place-items: center;
+}
+.author-badge svg { width: 7px; height: 7px; fill: #fff; display: block; }
+@media (max-width: 600px) {
+  .author-link img { width: 26px; height: 26px; }
+  /* スマホではロゴと同じ行の右端に寄せる */
+  .author-link { margin-right: 0; margin-left: auto; }
+}
