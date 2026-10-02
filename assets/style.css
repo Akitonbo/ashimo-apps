@@ -1388,3 +1388,15 @@ body.preview-open #previewPanel { max-height: 82vh; }
 }
 .x-link .x-icon { width: 14px; height: 14px; fill: currentColor; flex: none; }
 .x-link:hover { color: var(--text); }
+
+/* ヘッダー：ロゴの隣に置く運営者アイコン（Xへのリンク）
+   margin-right:auto で、ロゴとアイコンを左に寄せ、残りの余白を右に送る
+   （space-between のままだとアイコンが右端へ飛んでしまう） */
+.author-link {
+  display: inline-flex; flex: none; line-height: 0; border-radius: 50%;
+  margin-right: auto;
+}
+.author-link img { width: 30px; height: 30px; border-radius: 50%; display: block; }
+.author-link:hover { opacity: .82; }
+.author-link:focus-visible { outline: 2px solid var(--text-sub); outline-offset: 2px; }
+@media (max-width: 600px) { .author-link img { width: 26px; height: 26px; } }
