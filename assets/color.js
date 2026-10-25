@@ -694,7 +694,8 @@
   const STORE_URL = { manetone: 'https://apps.apple.com/jp/app/id6796136285', weightone: '' };
   // アプリ側がディープリンク（上記スキーム）に対応したバージョンを配信したら true にする。
   // false の間は「アプリに反映する」ボタンとQRコードを無効化し、色コードのコピー運用を案内する。
-  const APP_LINK_READY = false;
+  // マネトーンは 1.0.4 で対応済み（設定 → 色変更画面が開く）。WeighTone は未対応。
+  const APP_LINK_READY = { manetone: true, weightone: false };
 
   function themeLink() {
     const p = new URLSearchParams();
@@ -719,25 +720,26 @@
     const name = state.app === 'manetone' ? 'マネトーン' : 'WeighTone';
     const applyBtn = $('applyBtn');
     const qrWrap = document.querySelector('.apply-qr');
+    const ready = !!APP_LINK_READY[state.app];
 
-    applyBtn.textContent = APP_LINK_READY ? `${name}に反映する` : `${name}に反映する（準備中）`;
-    applyBtn.classList.toggle('is-disabled', !APP_LINK_READY);
-    applyBtn.setAttribute('aria-disabled', String(!APP_LINK_READY));
-    if (APP_LINK_READY) applyBtn.href = url;
+    applyBtn.textContent = ready ? `${name}に反映する` : `${name}に反映する（準備中）`;
+    applyBtn.classList.toggle('is-disabled', !ready);
+    applyBtn.setAttribute('aria-disabled', String(!ready));
+    if (ready) applyBtn.href = url;
     else applyBtn.removeAttribute('href');
 
-    if (qrWrap) qrWrap.hidden = !APP_LINK_READY;
+    if (qrWrap) qrWrap.hidden = !ready;
 
     const lead = $('applyLead');
     if (lead) {
-      lead.textContent = APP_LINK_READY
-        ? 'スマホでこのページを見ているときは、ボタンからアプリを開いてそのまま反映できます。パソコンのときは、QRコードをスマホで読み取ってください。'
+      lead.textContent = ready
+        ? 'スマホでこのページを見ているときは、ボタンを押すとアプリの色変更画面が開きます。パソコンのときは、QRコードをスマホで読み取ってください。'
         : 'ボタンから直接反映する機能は、アプリの対応版を準備中です。いまは下の「使っている色」から色コードをコピーして、アプリに貼り付けてください。';
     }
 
     $('applyUrl').textContent = url;
-    $('applyNote').textContent = APP_LINK_READY
-      ? `${name}が開かないときは、アプリが未インストールか、この機能に未対応のバージョンです。対応前は「色コードをコピー」してアプリに貼り付けてください。`
+    $('applyNote').textContent = ready
+      ? `ボタンを押すと${name}の設定（色変更）画面が開き、そこで決定すると反映されます。開かないときは、アプリが未インストールか、この機能に未対応の古いバージョンです。`
       : `${name}が対応版になると、このボタンからワンタップで色を反映できるようになります。`;
 
     // アプリを持っていない人向けのダウンロード導線
@@ -749,7 +751,7 @@
 
     // QRコード（パソコンで見ているとき用）
     const box = $('qrBox');
-    if (box && !APP_LINK_READY) box.innerHTML = '';
+    if (box && !ready) box.innerHTML = '';
     else if (box && typeof qrcode === 'function') {
       try {
         const qr = qrcode(0, 'M');
