@@ -745,7 +745,8 @@
     // アプリを持っていない人向けのダウンロード導線
     const store = STORE_URL[state.app];
     const storeBtn = $('storeBtn');
-    storeBtn.textContent = store ? `${name}をダウンロード` : `${name}をダウンロード（準備中）`;
+    const storeLabel = $('storeBtnLabel') || storeBtn;
+    storeLabel.textContent = store ? `${name}をダウンロード` : `${name}をダウンロード（準備中）`;
     storeBtn.href = store || '#';
     storeBtn.classList.toggle('is-disabled', !store);
 

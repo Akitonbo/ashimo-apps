@@ -1415,3 +1415,21 @@ body.preview-open #previewPanel { max-height: 82vh; }
   .author-badge { width: 18px; height: 18px; }
   .author-badge svg { width: 9px; height: 9px; }
 }
+
+/* ===== App Store への導線（アイコンは全ページ共通） ===== */
+.store-ic { color: #0D96F6; }
+/* 色の付いたボタンの中では、アイコンも文字色に合わせる */
+.btn-primary .store-ic, .btn-mane .store-ic, .btn-weight .store-ic { color: inherit; }
+
+/* カード見出しの横に置く小さなリンク（「公開準備中」と同じ位置・同じ大きさ） */
+.store-badge {
+  display: inline-flex; align-items: center; gap: 5px; vertical-align: middle;
+  margin-left: 8px; padding: 3px 10px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text-sub); font-size: 11px; font-weight: 700; letter-spacing: .02em;
+  white-space: nowrap; text-decoration: none;
+  transition: box-shadow .18s, transform .1s;
+}
+.store-badge:hover { box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.store-badge:active { transform: scale(.97); }
+.store-badge .store-ic { font-size: 13px; }
