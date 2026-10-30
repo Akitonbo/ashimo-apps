@@ -742,13 +742,25 @@
       ? `ボタンを押すと${name}の設定（色変更）画面が開き、そこで決定すると反映されます。開かないときは、アプリが未インストールか、この機能に未対応の古いバージョンです。`
       : `${name}が対応版になると、このボタンからワンタップで色を反映できるようになります。`;
 
-    // アプリを持っていない人向けのダウンロード導線
+    // アプリを持っていない人向けのダウンロード導線。
+    // App Store のバッジは Apple 提供の画像をそのまま使う決まりなので、
+    // ストアURLがあるときだけバッジを出し、無いときは文字で「準備中」と伝える。
     const store = STORE_URL[state.app];
-    const storeBtn = $('storeBtn');
-    const storeLabel = $('storeBtnLabel') || storeBtn;
-    storeLabel.textContent = store ? `${name}をダウンロード` : `${name}をダウンロード（準備中）`;
-    storeBtn.href = store || '#';
-    storeBtn.classList.toggle('is-disabled', !store);
+    const storeRow = $('storeRow');
+    if (storeRow) {
+      if (store) {
+        storeRow.innerHTML =
+          `<a class="appstore-badge" href="${store}" rel="noopener" aria-label="App Store で${name}をダウンロード">` +
+          '<picture>' +
+          '<source srcset="assets/icons/appstore-badge-white.svg" media="(prefers-color-scheme: dark)">' +
+          '<img src="assets/icons/appstore-badge-black.svg" alt="App Store からダウンロード" width="109" height="40">' +
+          '</picture></a>';
+      } else {
+        storeRow.innerHTML = '';
+        storeRow.textContent = `${name}は App Store で公開準備中です`;
+      }
+      storeRow.classList.toggle('store-row-soon', !store);
+    }
 
     // QRコード（パソコンで見ているとき用）
     const box = $('qrBox');
