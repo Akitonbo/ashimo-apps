@@ -691,7 +691,7 @@
   //   例) weighttrackerapp://theme?mode=pro&angle=90&stops=DA5272-0,F4B3C2-50,FADFDB-100
   const APP_SCHEME = { manetone: 'manetone', weightone: 'weighttrackerapp' };
   // App Store の公開後に、ここへストアのURLを貼り付けてください
-  const STORE_URL = { manetone: 'https://apps.apple.com/jp/app/id6796136285', weightone: '' };
+  const STORE_URL = { manetone: 'https://apps.apple.com/app/apple-store/id6796136285?pt=129240430&ct=site&mt=8', weightone: '' };
   // アプリ側がディープリンク（上記スキーム）に対応したバージョンを配信したら true にする。
   // false の間は「アプリに反映する」ボタンとQRコードを無効化し、色コードのコピー運用を案内する。
   // マネトーンは 1.0.4 で対応済み（設定 → 色変更画面が開く）。WeighTone は未対応。
@@ -745,12 +745,13 @@
     // アプリを持っていない人向けのダウンロード導線。
     // App Store のバッジは Apple 提供の画像をそのまま使う決まりなので、
     // ストアURLがあるときだけバッジを出し、無いときは文字で「準備中」と伝える。
+    // URLには計測用のパラメータが付くので、属性に入れるときは & をエスケープする。
     const store = STORE_URL[state.app];
     const storeRow = $('storeRow');
     if (storeRow) {
       if (store) {
         storeRow.innerHTML =
-          `<a class="appstore-badge" href="${store}" rel="noopener" aria-label="App Store で${name}をダウンロード">` +
+          `<a class="appstore-badge" href="${store.replace(/&/g, '&amp;')}" rel="noopener" aria-label="App Store で${name}をダウンロード">` +
           '<picture>' +
           '<source srcset="assets/icons/appstore-badge-white.svg" media="(prefers-color-scheme: dark)">' +
           '<img src="assets/icons/appstore-badge-black.svg" alt="App Store からダウンロード" width="109" height="40">' +
