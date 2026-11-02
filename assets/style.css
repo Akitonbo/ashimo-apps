@@ -1380,6 +1380,27 @@ body.preview-open #previewPanel { max-height: 82vh; }
   white-space: nowrap;
 }
 
+/* ===== SNSのマーク（X・Instagram） =====
+   どちらのSNSかひと目で分かるよう、それぞれのブランドの色をそのまま使う。
+   Xは黒地、Instagramは公式のグラデーション地に、白のマークを乗せる。 */
+.sns-tile {
+  display: grid; place-items: center; flex: none;
+  width: 32px; height: 32px; border-radius: 9px;
+  color: #fff;
+}
+.sns-tile-x { background: #000; }
+.sns-tile-ig {
+  background: radial-gradient(circle at 30% 107%,
+    #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+/* 暗い配色では黒地が背景に溶けるので、ふちで輪郭を出す */
+@media (prefers-color-scheme: dark) {
+  .sns-tile-x { border: 1px solid var(--border); }
+}
+a.sns-tile:hover { opacity: .85; }
+a.sns-tile:focus-visible { outline: 2px solid var(--text-sub); outline-offset: 3px; }
+
+.sns-tile .sns-icon { width: 15px; height: 15px; fill: currentColor; display: block; }
 /* Instagram のマークは線が細かくパスも長いので、画像を1枚だけ置いて
    CSS のマスクで色を付ける（各ページに直接書くとHTMLが読みづらくなるため）。
    url() は style.css からの相対パスなので、どの階層のページでも同じ指定で届く。 */
@@ -1388,54 +1409,33 @@ body.preview-open #previewPanel { max-height: 82vh; }
   -webkit-mask: url(icons/instagram.svg) center / contain no-repeat;
           mask: url(icons/instagram.svg) center / contain no-repeat;
 }
+.sns-tile .ig-glyph { width: 17px; height: 17px; }
 
-/* フッターのSNSリンク（X・Instagram） */
+/* ヘッダー：ロゴの隣に2つ並べる。
+   margin-right:auto で、ロゴとマークを左に寄せ、残りの余白を右に送る
+   （space-between のままだとマークが右端へ飛んでしまう） */
+.sns-group { display: inline-flex; align-items: center; gap: 8px; margin-right: auto; }
+
+/* フッター：アカウント名を添えて並べる。マークは文字に合わせて小さく */
 .foot-brand { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .sns-link {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 7px;
   color: var(--text-sub); text-decoration: none; font-size: 13px;
 }
-.sns-link .sns-icon { width: 14px; height: 14px; fill: currentColor; flex: none; }
-.sns-link .ig-glyph { width: 14px; height: 14px; }
 .sns-link:hover { color: var(--text); }
+.sns-tile-sm { width: 20px; height: 20px; border-radius: 6px; }
+.sns-tile-sm .sns-icon { width: 10px; height: 10px; }
+.sns-tile-sm .ig-glyph { width: 12px; height: 12px; }
 
-/* ヘッダー：ロゴの隣に置く運営者アイコン（X）とInstagramのリンク
-   margin-right:auto で、ロゴとアイコンを左に寄せ、残りの余白を右に送る
-   （space-between のままだとアイコンが右端へ飛んでしまう） */
-.author-group { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; }
-.author-link {
-  display: inline-flex; flex: none; line-height: 0; border-radius: 50%;
-}
-.author-link { position: relative; }
-.author-link img { width: 32px; height: 32px; border-radius: 50%; display: block; }
-.author-link:hover { opacity: .82; }
-.author-link:focus-visible { outline: 2px solid var(--text-sub); outline-offset: 2px; }
-/* Xへのリンクだとわかるよう、右下に小さなバッジを重ねる */
-.author-badge {
-  position: absolute; right: -4px; bottom: -4px;
-  width: 17px; height: 17px; border-radius: 50%;
-  background: #000; border: 2px solid var(--bg);
-  display: grid; place-items: center;
-}
-.author-badge svg { width: 8.5px; height: 8.5px; fill: #fff; display: block; }
-/* 運営者アイコンと同じ大きさの丸ボタン。中身はマークだけなので枠で輪郭を出す */
-.sns-round {
-  display: grid; place-items: center; flex: none;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--surface-2); border: 1px solid var(--border);
-  color: var(--text-sub);
-}
-.sns-round .ig-glyph { width: 16px; height: 16px; }
-.sns-round:hover { color: var(--text); }
-.sns-round:focus-visible { outline: 2px solid var(--text-sub); outline-offset: 2px; }
 @media (max-width: 600px) {
   /* スマホではロゴと同じ行の右端へ。指で押しやすいよう少し大きく */
-  .author-group { margin-right: 0; margin-left: auto; gap: 8px; }
-  .author-link img { width: 34px; height: 34px; }
-  .author-badge { width: 18px; height: 18px; }
-  .author-badge svg { width: 9px; height: 9px; }
-  .sns-round { width: 34px; height: 34px; }
-  .sns-round .ig-glyph { width: 17px; height: 17px; }
+  .sns-group { margin-right: 0; margin-left: auto; }
+  .sns-tile { width: 34px; height: 34px; border-radius: 10px; }
+  .sns-tile .sns-icon { width: 16px; height: 16px; }
+  .sns-tile .ig-glyph { width: 18px; height: 18px; }
+  .sns-tile-sm { width: 20px; height: 20px; border-radius: 6px; }
+  .sns-tile-sm .sns-icon { width: 10px; height: 10px; }
+  .sns-tile-sm .ig-glyph { width: 12px; height: 12px; }
 }
 
 /* ===== App Store バッジ =====
