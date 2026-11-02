@@ -1380,21 +1380,31 @@ body.preview-open #previewPanel { max-height: 82vh; }
   white-space: nowrap;
 }
 
-/* フッターのXリンク */
+/* Instagram のマークは線が細かくパスも長いので、画像を1枚だけ置いて
+   CSS のマスクで色を付ける（各ページに直接書くとHTMLが読みづらくなるため）。
+   url() は style.css からの相対パスなので、どの階層のページでも同じ指定で届く。 */
+.ig-glyph {
+  display: block; flex: none; background: currentColor;
+  -webkit-mask: url(icons/instagram.svg) center / contain no-repeat;
+          mask: url(icons/instagram.svg) center / contain no-repeat;
+}
+
+/* フッターのSNSリンク（X・Instagram） */
 .foot-brand { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.x-link {
+.sns-link {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--text-sub); text-decoration: none; font-size: 13px;
 }
-.x-link .x-icon { width: 14px; height: 14px; fill: currentColor; flex: none; }
-.x-link:hover { color: var(--text); }
+.sns-link .sns-icon { width: 14px; height: 14px; fill: currentColor; flex: none; }
+.sns-link .ig-glyph { width: 14px; height: 14px; }
+.sns-link:hover { color: var(--text); }
 
-/* ヘッダー：ロゴの隣に置く運営者アイコン（Xへのリンク）
+/* ヘッダー：ロゴの隣に置く運営者アイコン（X）とInstagramのリンク
    margin-right:auto で、ロゴとアイコンを左に寄せ、残りの余白を右に送る
    （space-between のままだとアイコンが右端へ飛んでしまう） */
+.author-group { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; }
 .author-link {
   display: inline-flex; flex: none; line-height: 0; border-radius: 50%;
-  margin-right: auto;
 }
 .author-link { position: relative; }
 .author-link img { width: 32px; height: 32px; border-radius: 50%; display: block; }
@@ -1408,12 +1418,24 @@ body.preview-open #previewPanel { max-height: 82vh; }
   display: grid; place-items: center;
 }
 .author-badge svg { width: 8.5px; height: 8.5px; fill: #fff; display: block; }
+/* 運営者アイコンと同じ大きさの丸ボタン。中身はマークだけなので枠で輪郭を出す */
+.sns-round {
+  display: grid; place-items: center; flex: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text-sub);
+}
+.sns-round .ig-glyph { width: 16px; height: 16px; }
+.sns-round:hover { color: var(--text); }
+.sns-round:focus-visible { outline: 2px solid var(--text-sub); outline-offset: 2px; }
 @media (max-width: 600px) {
   /* スマホではロゴと同じ行の右端へ。指で押しやすいよう少し大きく */
-  .author-link { margin-right: 0; margin-left: auto; }
+  .author-group { margin-right: 0; margin-left: auto; gap: 8px; }
   .author-link img { width: 34px; height: 34px; }
   .author-badge { width: 18px; height: 18px; }
   .author-badge svg { width: 9px; height: 9px; }
+  .sns-round { width: 34px; height: 34px; }
+  .sns-round .ig-glyph { width: 17px; height: 17px; }
 }
 
 /* ===== App Store バッジ =====
