@@ -82,11 +82,10 @@ python3 -m http.server 8765
   - `src/screens/SettingsScreen.js` / `src/components/ProPaywallModal.js`
 
 ## 注意点（確認したまま未対応）
-- WeighTone を App Store で公開したら、ストアURLを2か所に入れる（いまは「公開準備中」表示）
-  - `weightone/index.html` … `is-disabled` の `<span>` を `<a href="ストアURL">` に変える
-  - `assets/color.js` の `STORE_URL.weightone` … 空文字をストアURLに差し替え
-- WeighTone のプライバシーポリシーは「広告SDKなし・ヘルスケアは読み取りのみ」と書かれているが、
-  アプリには AdMob・トラッキング許諾・ヘルスケア書き込みの権限文言・マイク権限がある。公開前に要確認。
+- WeighTone は 2026-11-07 に App Store で公開済み（v1.0.1・日本のみ）。ストアURLは `weightone/index.html`・`index.html`・`assets/color.js` に反映済み
+  - 両アプリとも計測用パラメータ付き（`?pt=129240430&ct=site&mt=8`）。WeighTone は日本のみの配信なので、
+    URLに `/jp/` を入れている（入れないと日本国外からは404になる）。全世界配信になったら `/jp/` を外す
+- WeighTone のプライバシーポリシーは AdMob・トラッキング許諾・ヘルスケア読み取り専用の内容に更新済み（2026-11-02）
 - カラーラボの「基本色から自動で作る」は、サイト側だけ強めのグラデーション（白42%/黒30%）に変更済み。
   アプリ側（`src/utils/colors.js` の `deriveGradientStops`）は従来のまま（白22%/黒10%）。
 

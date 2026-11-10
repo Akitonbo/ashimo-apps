@@ -690,12 +690,12 @@
   //   位置は 0〜100 の整数。stops は位置の小さい順。
   //   例) weighttrackerapp://theme?mode=pro&angle=90&stops=DA5272-0,F4B3C2-50,FADFDB-100
   const APP_SCHEME = { manetone: 'manetone', weightone: 'weighttrackerapp' };
-  // App Store の公開後に、ここへストアのURLを貼り付けてください
-  const STORE_URL = { manetone: 'https://apps.apple.com/app/apple-store/id6796136285?pt=129240430&ct=site&mt=8', weightone: '' };
+  // 各アプリの App Store のURL
+  const STORE_URL = { manetone: 'https://apps.apple.com/app/apple-store/id6796136285?pt=129240430&ct=site&mt=8', weightone: 'https://apps.apple.com/jp/app/apple-store/id6806597586?pt=129240430&ct=site&mt=8' };
   // アプリ側がディープリンク（上記スキーム）に対応したバージョンを配信したら true にする。
   // false の間は「アプリに反映する」ボタンとQRコードを無効化し、色コードのコピー運用を案内する。
-  // マネトーンは 1.0.4 で対応済み（設定 → 色変更画面が開く）。WeighTone は未対応。
-  const APP_LINK_READY = { manetone: true, weightone: false };
+  // マネトーンは 1.0.4、WeighTone は 1.0.1 で対応済み（設定 → 色変更画面が開く）。
+  const APP_LINK_READY = { manetone: true, weightone: true };
 
   function themeLink() {
     const p = new URLSearchParams();
